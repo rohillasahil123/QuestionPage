@@ -20,7 +20,7 @@ const Question = () => {
     setCorrectAnswer("")
 
     try {
-      const response = await axios.post("http://3.108.59.193/addquestiongk", {
+      const response = await axios.post("https://www.goquizzy.com/addquestiongk", {
         question,
         correctAnswer,
         options
