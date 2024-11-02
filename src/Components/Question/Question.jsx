@@ -38,7 +38,7 @@ const Question = () => {
       <div className="w-full sm:w-[90%] md:w-[70%] lg:w-[60%] xl:w-[80%] bg-teal-100 rounded-2xl border text-center items-center justify-center  p-4 sm:p-8">
         <div className="h-[50px] w-full shadow-xl text-center items-center flex justify-between mb-6 ">
           <div className="bg-indigo-900 text-white w-[120px] sm:w-[150px] h-9 rounded-xl ml-4 cursor-pointer transform scale-110 animate-pulse">
-            <h1 className="font-bold text-lg sm:text-2xl">GoQuizy</h1>
+            <h1 className="font-bold text-lg sm:text-2xl">Goquizy</h1>
           </div>
             <div>
           <h1 className="text-2xl sm:text-3xl font-bold">
