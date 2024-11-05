@@ -4,7 +4,7 @@ import toast from "react-hot-toast";
 import Select from "../Select/Select";
 
 
-const Question = () => {
+const Practice = () => {
   const [question, setQuestion] = useState("");
   const [options, setOptions] = useState(["", "", "", ""]);
   const [correctAnswer, setCorrectAnswer] = useState("");
@@ -43,17 +43,17 @@ const Question = () => {
   return (
     <div className="min-h-screen w-full flex justify-center mt-9 p-4 sm:p-8">
       <div className="w-full sm:w-[90%] md:w-[70%] lg:w-[60%] xl:w-[80%] bg-white rounded-2xl border text-center items-center justify-center p-4 sm:p-8">
-        <div className="h-[50px] w-full shadow-xl text-center items-center flex justify-between mb-6 rounded-2xl">
-          <div className="bg-indigo-900 text-white w-[120px] sm:w-[150px] h-9 rounded-2xl ml-4 cursor-pointer transform scale-110 animate-pulse">
+        <div className="h-[50px] w-full shadow-xl text-center items-center flex justify-between mb-6">
+          <div className="bg-indigo-900 text-white w-[120px] sm:w-[150px] h-9 rounded-xl ml-4 cursor-pointer transform scale-110 animate-pulse">
             <h1 className="font-bold text-lg sm:text-2xl">Goquizy</h1>
           </div>
           <div>
-            <h1 className="text-xl sm:text-2xl font-bold">
-             <span className="text-green-600">Gk</span>{" "}
+            <h3 className="text-lg sm:text-2xl font-bold">
+             <span className="text-green-600">Practice</span>{" "}
               <span className="text-red-600">Question</span>
-            </h1>
+            </h3>
           </div>
-          <div className=" sm:mr-[3%]">
+          <div className=" sm:mr-[3%]" >
            <Select/>
           </div>
         </div>
@@ -102,4 +102,4 @@ const Question = () => {
   );
 };
 
-export default Question;
+export default Practice;
