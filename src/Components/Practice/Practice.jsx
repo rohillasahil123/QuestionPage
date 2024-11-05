@@ -23,7 +23,7 @@ const Practice = () => {
     setCorrectAnswer("");
 
     try {
-      const response = await axios.post("https://goquizzy.com/addquestiongk", {
+      const response = await axios.post("https://goquizzy.com/addquestionpractice", {
         question,
         correctAnswer,
         options,
