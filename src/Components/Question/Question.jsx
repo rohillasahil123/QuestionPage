@@ -30,7 +30,11 @@ const Question = () => {
       });
       console.log(response.data);
       toast.success("Question saved to database"); 
+      if(response.status == 400){
+        toast.error("Question already exists in Practice_database");
+      }
     } catch (error) {
+      // toast.error( error.response?.data?.message || error.message)
       console.error(
         "Error adding question:",
         error.response?.data?.message || error.message

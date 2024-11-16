@@ -30,7 +30,9 @@ const Practice = () => {
       });
       console.log(response.data);
       toast.success("Question saved to Practice_database"); 
+     
     } catch (error) {
+     toast.error(  error.response?.data?.message || error.message)
       console.error(
         "Error adding question:",
         error.response?.data?.message || error.message
