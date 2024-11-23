@@ -1,0 +1,286 @@
+.OURTEAM {
+    height: auto; /* Adjust to auto for flexibility */
+    padding: 20px;
+    display: flex;
+    flex-wrap: wrap; /* Allow elements to wrap on smaller screens */
+    align-items: center;
+    justify-content: space-evenly;
+    background-color: rgba(255, 255, 255, 0.465);
+    background-image: url('https://st2.depositphotos.com/1006542/6566/i/450/depositphotos_65669135-stock-photo-woman-sitting-on-an-old.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    background-blend-mode: overlay;
+}
+
+.OUTTEXT {
+    text-align: justify;
+    align-content: center;
+    width: 50%;
+    color: black;
+    font-size: 50px;
+    margin-bottom: 20px; /* Add spacing for mobile view */
+}
+
+.OURCR {
+    text-align: center;
+    align-content: center;
+    width: 50%;
+}
+
+.OURCR img {
+    border-radius: 50px;
+    margin: auto;
+    max-width: 100%; /* Ensure the image scales properly */
+    height: auto; /* Maintain aspect ratio */
+}
+
+.OUTTEXT span {
+    background: linear-gradient(90deg, red, yellow, green, blue);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-size: 400% 100%;
+    font-weight: bold;
+    animation: textGradient 5s ease infinite;
+}
+
+/* Keyframes for text gradient */
+@keyframes textGradient {
+    0% {
+        background-position: 0% 50%;
+    }
+
+    50% {
+        background-position: 100% 50%;
+    }
+
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+/* Responsive Styles */
+
+/* Tablets and smaller screens (max-width: 768px) */
+@media (max-width: 768px) {
+    .OURTEAM {
+        flex-direction: column; /* Stack content vertically */
+        text-align: center;
+        padding: 10px; /* Reduce padding */
+    }
+
+    .OUTTEXT, 
+    .OURCR {
+        width: 90%; /* Take most of the screen width */
+        text-align: center;
+    }
+
+    .OUTTEXT span, .OUTTEXT h1{
+        font-size: 40px; /* Adjust text size */
+    }
+}
+
+/* Mobile devices (max-width: 480px) */
+@media (max-width: 480px) {
+    .OURTEAM {
+        padding: 10px; /* Compact padding for small screens */
+    }
+
+    .OUTTEXT {
+        font-size: 14px; /* Smaller font size */
+    }
+
+    .OURCR img {
+        max-width: 80%; /* Scale down image */
+    }
+    .OUTTEXT span, .OUTTEXT h1{
+        font-size: 20px; /* Adjust text size */
+    }
+}
+
+
+  .infoSection {
+    padding: 60px 40px;
+}
+
+.infoBox {
+    width: 100%;
+    height: 350px;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    padding: 40px 20px;
+    gap: 50px;
+    border-radius: 50px;
+    box-shadow: 0px 0px 10px black;
+    transition: all 0.3s ease; /* Smooth transitions for responsiveness */
+}
+
+.infoBox-text {
+    width: 40%;
+    height: 100%;
+    align-content: center;
+    text-align: center;
+}
+.infoBox-img {
+    width: 40%;
+    height: 100%;
+}
+
+.infoBox-text h1 {
+    font-size: 40px;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+.infoBox-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50px;
+}
+
+/* Responsive Styles */
+
+/* For screens less than 1000px (Tablets and smaller devices) */
+@media (max-width: 1000px) {
+    .infoBox {
+        width: 80%;
+        flex-direction: column; /* Switch to vertical stacking */
+        height: auto; /* Remove fixed height */
+        padding: 40px 10px; /* Adjust padding for smaller screens */
+        gap: 20px; /* Reduce gap */
+        margin: auto;
+        }
+
+    .infoBox-text,
+    .infoBox-img {
+        width: 70%; /* Take full width */
+    }
+
+    .infoBox-text h1 {
+        font-size: 30px; /* Reduce heading size */
+    }
+}
+
+/* For screens less than 768px (Mobile devices) */
+@media (max-width: 768px) {
+    .infoSection {
+        padding: 30px 20px; /* Reduce overall section padding */
+        margin-top: 40px;
+    }
+
+    .infoBox {
+        padding: 20px; /* Compact box padding */
+        gap: 15px; /* Reduce gap further */
+    }
+
+    .infoBox-text h1 {
+        font-size: 24px; /* Smaller font size for headings */
+    }
+    .infoBox-text, .infoBox-img{
+        width: 80%;
+    }
+
+}
+
+/* For screens less than 480px (Small mobile devices) */
+@media (max-width: 480px) {
+    .infoSection {
+        padding: 20px 0px;
+        width: 100%;
+    }
+
+    .infoBox-text h1 {
+        font-size: 20px; /* Further reduce heading size */
+    }
+    .infoBox{
+        padding: 15px 5px;
+    }
+    .infoBox-text, .infoBox-img{
+        width: 90%;
+    }
+
+    .infoBox-text {
+        text-align: left; /* Align text for better readability */
+    }
+}
+.teamSection {
+    width: 100%;
+    text-align: center;
+    padding: 20px;
+}
+
+.teamSection h1 {
+    font-size: 50px;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+/* Team Box */
+.teamBox {
+    padding: 20px;
+    display: flex;
+    flex-wrap: wrap; /* Allow wrapping for smaller screens */
+    justify-content: center; /* Center items */
+    gap: 20px; /* Add spacing between team members */
+}
+
+/* Team Member */
+.team-member {
+    text-align: center;
+    align-content: center;
+    max-width: 200px; /* Restrict max width for uniformity */
+    margin-bottom: 20px; /* Add spacing between rows */
+}
+
+.team-member img {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    box-shadow: 0px 0px 30px #012141;
+    margin-bottom: 20px;
+}
+
+.team-member h3 {
+    color: #012141;
+    font-size: 25px;
+}
+
+/* Responsive Adjustments */
+
+/* For Tablets (max-width: 768px) */
+@media (max-width: 768px) {
+    .teamSection h1 {
+        font-size: 40px; /* Reduce heading size */
+    }
+
+    .team-member img {
+        width: 120px; /* Smaller images */
+        height: 120px;
+    }
+
+    .team-member h3 {
+        font-size: 20px; /* Reduce text size */
+    }
+}
+
+/* For Mobile Devices (max-width: 480px) */
+@media (max-width: 480px) {
+    .teamSection h1 {
+        font-size: 30px; /* Smaller heading for mobile */
+    }
+
+    .team-member img {
+        width: 100px; /* Further reduce image size */
+        height: 100px;
+    }
+
+    .team-member h3 {
+        font-size: 18px; /* Adjust text size for mobile */
+    }
+
+    .teamBox {
+        gap: 10px; /* Reduce gap between team members */
+    }
+}
