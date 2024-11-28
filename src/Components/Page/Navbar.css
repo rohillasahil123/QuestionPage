@@ -9,7 +9,7 @@ body {
 }
 
 .navbar {
-  padding: 12px;
+  /* padding: 12px; */
   width: 100%;
   background-color: #012141;
   color: #fff;
@@ -24,7 +24,7 @@ body {
 
 .nav-menu {
   display: flex;
-  margin: 8px;
+  /* margin: 8px; */
 }
 
 .nav-menu.hidden {
@@ -46,6 +46,7 @@ body {
 
 .nav-logo {
   cursor: pointer;
+  padding: 12px;
 }
 
 .nav-logo-box h1 {
@@ -123,6 +124,7 @@ body {
 .nav-menu-mobile {
   display: none;
   cursor: pointer;
+  padding: 12px;
 }
 
 .menu-toggle {
@@ -170,15 +172,28 @@ body {
   position: relative;
 }
 
+.logo::after {
+  content: "";
+  position: absolute;
+  top: -15px; /* Larger outline, adjust as needed */
+  left: -15px;
+  width: 70px; /* Adjust size to fit */
+  height: 70px;
+  border-radius: 50%;
+  border: 4px solid transparent;
+  border-top-color: blue; /* Different starting color */
+  animation: rotateColorCounter 3s linear infinite;
+}
+
 .logo::before {
   content: "";
   position: absolute;
-  top: -10px;
-  left: -10px;
-  width: 60px;
-  height: 60px;
+  top: -7.5px;
+  left: -7.5px;
+  width: 55px;
+  height: 55px;
   border-radius: 50%;
-  border: 5px solid transparent;
+  border: 4px solid transparent;
   /* Border initially transparent */
   border-top-color: red;
   /* Starting color */
@@ -210,5 +225,27 @@ body {
   100% {
     transform: rotate(360deg);
     border-top-color: rgb(255, 0, 72);
+  }
+}
+@keyframes rotateColorCounter {
+  0% {
+    transform: rotate(0deg);
+    border-top-color: #018a44;
+  }
+  25% {
+    transform: rotate(-90deg); /* Negative rotation for counterclockwise */
+    border-top-color: #ffaa00;
+  }
+  50% {
+    transform: rotate(-180deg);
+    border-top-color: #ff00e1;
+  }
+  75% {
+    transform: rotate(-270deg);
+    border-top-color: #018aff;
+  }
+  100% {
+    transform: rotate(-360deg);
+    border-top-color: #00ff6f;
   }
 }
