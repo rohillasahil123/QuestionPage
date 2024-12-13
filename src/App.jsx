@@ -10,6 +10,7 @@ import AboutPage from './Components/Page/AboutPage';
 import ContactUsPage from './Components/Page/ContactUsPage';
 import Navbar from './Components/Page/Navbar';
 import Footer from './Components/Page/Footer';
+import LoginPage from './Components/Page/LoginPage';
 
 const App = () => {
   return (
@@ -23,6 +24,7 @@ const App = () => {
           <Route path='/practice' element={ <Practice/> } />
           <Route path="/about" element={<AboutPage />} />
           <Route path="/contact" element={<ContactUsPage />} />
+          <Route path="/login" element={<LoginPage />} />
         </Routes>
         <Toaster />
       </div>

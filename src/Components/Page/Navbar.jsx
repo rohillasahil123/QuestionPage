@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { NavLink } from "react-router-dom";
 import "./Navbar.css";
-import logo from '../Assets/logo.png'
 
 const Navbar = () => {
   const [isMobileView, setIsMobileView] = useState(window.innerWidth <= 1000);
@@ -80,6 +79,13 @@ const Navbar = () => {
             activeClassName="active-link"
           >
             Contact Us
+          </NavLink>{" "}
+          <NavLink
+            className="nav-menu-item"
+            to="/login"
+            activeClassName="active-link"
+          >
+            Login
           </NavLink>
         </li>
       </ul>
