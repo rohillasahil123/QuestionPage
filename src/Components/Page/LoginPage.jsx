@@ -37,9 +37,7 @@ const LoginPage = () => {
             "Content-Type": "application/json",
           },
         }
-
       );
-      
       if (response.data.success) {
         const { token } = response.data;
         Cookies.set("userToken", token, {
