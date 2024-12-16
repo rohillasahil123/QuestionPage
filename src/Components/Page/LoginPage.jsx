@@ -38,13 +38,13 @@ const LoginPage = () => {
           },
         }
       );
-      if (response.data.success) {
-        const { token } = response.data;
-        Cookies.set("userToken", token, {
-          secure: true,
-          sameSite: "Strict",
-          expires: 1,
-        });
+        if (response.data.success) {
+          const { token } = response.data;
+          Cookies.set("userToken", token, {
+            secure: true, 
+            sameSite: "Strict",
+            expires: 1,
+          });
         toast.success("OTP verified successfully!");
         navigate("/");
       } else {
