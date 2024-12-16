@@ -30,16 +30,9 @@ const TeacherForm = () => {
     try {
       const response = await axios.post("https://goquizzy.com/teacherform", formData);
       console.log(response.data)
-      if (response.data.token) {
-        const { token } = response.data;
-        Cookies.set("userToken", token, {
-          secure: true, 
-          sameSite: "Strict",
-          expires: 1,
-        });
+      if (response.data.message === "successfull") {
         toast.success("Form Submitted Successfully!");
-        console.log(token)
-        navigate("/loginteacher");
+        navigate("/loginteacher");  
       } else {
         toast.error("form subbmitted failed");
       }
