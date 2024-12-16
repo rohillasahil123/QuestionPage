@@ -118,6 +118,16 @@ const Navbar = () => {
             className={({ isActive }) =>
               isActive ? "nav-menu-item active-link" : "nav-menu-item"
             }
+            to="/QuizzyGame"
+          >
+            Question
+          </NavLink>
+        </li>
+        <li>
+          <NavLink
+            className={({ isActive }) =>
+              isActive ? "nav-menu-item active-link" : "nav-menu-item"
+            }
             to="/contact"
           >
             Contact Us

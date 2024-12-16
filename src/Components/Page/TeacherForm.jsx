@@ -1,7 +1,7 @@
 import axios from "axios";
 import React, { useState } from "react";
 import toast from "react-hot-toast";
-import Cookies from "js-cookie";
+
 import { useNavigate  , Link} from "react-router-dom";
 
 const TeacherForm = () => {
