@@ -50,8 +50,8 @@ const TeacherForm = () => {
   };
 
   return (
-    <div className="h-[100vh]">
-      <div className="max-w-md h-[90vh] mx-auto sm:w-[60%] mt-[24%] sm:mt-[9%] p-4 border rounded shadow">
+    <div className="sm:h-[120vh] h-[80vh]">
+      <div className="max-w-md sm:h-[110vh] h-[80vh] mx-auto sm:w-[60%] mt-[24%] sm:mt-[9%] p-4 border rounded shadow">
         <h2 className="text-2xl font-bold mb-4 text-center">School Form</h2>
         <form onSubmit={handleSubmit}>
           {/* Row 1 */}

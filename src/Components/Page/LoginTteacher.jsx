@@ -53,9 +53,9 @@ const LoginTteacher = () => {
 
   return (
     <>
-     <div className="h-[100vh]">
+     <div className="sm:h-[100vh] h-[80vh] ">
     <div className="max-w-md h-[70vh] mx-auto sm:w-[60%] mt-[10%] p-4 border rounded shadow">
-    <h2 className="text-2xl font-bold mb-4 text-center">Login Teacher</h2>
+    <h2 className="text-2xl  mb-4 text-center  font-extralight">Login GoQuizzy</h2>
     <form onSubmit={handleSubmit}>
         <div className="w-[90%]">
           <label
