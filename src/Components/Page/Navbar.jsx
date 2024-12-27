@@ -96,7 +96,7 @@ const Navbar = () => {
           </NavLink>
         </li>
         <li>
-        {userRoles === 'teacher' && (
+        {userRoles === 'teacher' || userRoles === 'admin' &&(
         <NavLink to="/QuizzyGame" className="nav-menu-item">Questions</NavLink>
       )}
         </li>

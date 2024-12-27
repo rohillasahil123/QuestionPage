@@ -18,7 +18,7 @@ const Select = () => {
               <option value="" disabled>
                 Select option
               </option>
-              <option value="/"> <Link to='/' >G_K Question</Link></option>
+              <option value="/QuizzyGame"> <Link to='/QuizzyGame' >G_K Question</Link></option>
               <option value="/practice"> <Link to='/practice' >practice Question</Link></option>
              
             </select>

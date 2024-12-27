@@ -61,13 +61,13 @@ const TeacherForm = () => {
                 htmlFor="teacherName"
                 className="block text-sm text-black font-medium mb-2"
               >
-                Teacher Name
+              Your Name
               </label>
               <input
                 type="text"
                 id="teacherName"
                 name="teacherName"
-                placeholder="Teacher Name"
+                placeholder="First Name"
                 value={formData.teacherName}
                 onChange={handleChange}
                 className="w-full p-2 border rounded focus:outline-none focus:ring focus:ring-blue-300"
@@ -166,7 +166,7 @@ const TeacherForm = () => {
                 Password
               </label>
               <input
-                type="password"
+                type="text"
                 id="password"
                 name="password"
                 placeholder="Password"
@@ -216,7 +216,7 @@ const TeacherForm = () => {
             >
               <option value="admin">Admin</option>
               <option value="teacher">Teacher</option>
-              <option value="user">User</option>
+              <option value="student">Student</option>
             </select>
           </div>
 
