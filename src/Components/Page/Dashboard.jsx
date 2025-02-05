@@ -28,7 +28,7 @@ const Dashboard = () => {
 
   const getFranchiseDetails = async (type, id) => {
     let payload = { role: type, id: id };
-    const response = await axios.post(`http://http://3.108.59.193/company/getFranchiseDetails`, payload, {
+    const response = await axios.post(`http://3.108.59.193/company/getFranchiseDetails`, payload, {
       withCredentials: true,
       validateStatus: (status) => status < 500,
     });
