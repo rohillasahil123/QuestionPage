@@ -38,7 +38,7 @@ const FeaturesSection = () => {
 
   return (
     <div className="features-section">
-      <h2 className="section-title">WHY PLAY ONLINE MONEY GAMES ON ZUPEE?</h2>
+      <h2 className="section-title">WHY PLAY ONLINE MONEY GAMES ON GO QUIZZY?</h2>
       <div className="features">
         {features.map((feature) => (
           <div className="feature-item" key={feature.id}>

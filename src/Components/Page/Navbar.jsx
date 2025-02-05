@@ -2,24 +2,24 @@ import React, { useState, useEffect , useContext} from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import "./Navbar.css";
 import Cookies from "js-cookie";
+import { useUser } from "../../helper/useContext";
 
 const Navbar = () => {
   const [isMobileView, setIsMobileView] = useState(window.innerWidth <= 1000);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const navigate = useNavigate();
-
-
+  const { isLoggedIn } = useUser();
 
 
   const handleLogin = () => {
-    navigate("/loginteacher");
+    navigate("/login");
   };
 
   const handleLogout = () => {
     Cookies.remove("userToken");
     Cookies.remove("userRole");
     if (!Cookies.get("usertoken")) {
-      navigate("/loginteacher");
+      navigate("/login");
     }
   };
 
@@ -34,7 +34,6 @@ const Navbar = () => {
   const toggleMenu = () => {
     setIsMenuOpen((prev) => !prev);
   }
-
 
 
   useEffect(() => {
@@ -72,13 +71,13 @@ const Navbar = () => {
 
       {/* Navigation Menu */}
       <ul
-        className={`nav-menu ${isMobileView ? (isMenuOpen ? "show" : "hidden") : ""
+        className={`nav-menu p-2 gap-1 ${isMobileView ? (isMenuOpen ? "show" : "hidden") : ""
           }`}
       >
         <li>
           <NavLink
             className={({ isActive }) =>
-              isActive ? "nav-menu-item active-link" : "nav-menu-item"
+              isActive ? "nav-menu-item text-green-500 font-bold" : "nav-menu-item"
             }
             to="/"
           >
@@ -88,7 +87,7 @@ const Navbar = () => {
         <li>
           <NavLink
             className={({ isActive }) =>
-              isActive ? "nav-menu-item active-link" : "nav-menu-item"
+              isActive ? "nav-menu-item  text-green-500 font-bold" : "nav-menu-item"
             }
             to="/about"
           >
@@ -103,12 +102,23 @@ const Navbar = () => {
         <li>
           <NavLink
             className={({ isActive }) =>
-              isActive ? "nav-menu-item active-link" : "nav-menu-item"
+              isActive ? "nav-menu-item text-green-500 font-bold" : "nav-menu-item"
             }
             to="/contact"
           >
             Contact Us
           </NavLink>
+        </li>
+        <li>
+          {(Cookies.get("userToken"))? (<NavLink
+            className={({ isActive }) =>
+              isActive ? "nav-menu-item text-green-500 font-bold " : "nav-menu-item"
+            }
+            to="/dashboard"
+          >
+            Dashboard
+          </NavLink>)
+          :null}
         </li>
         <li>
           {Cookies.get("userToken") ? (

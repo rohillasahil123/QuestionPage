@@ -22,7 +22,7 @@ function Home() {
   const handleClose = () => setShow(false);
 
   const handleClick = () => {
-    const apkUrl = 'http://localhost:5173' + "/app-release.apk";
+    const apkUrl = 'https://www.goquizzy.com/' + "app-release.apk";
     const link = document.createElement("a");
     link.href = apkUrl;
     link.download = "app-release.apk";
