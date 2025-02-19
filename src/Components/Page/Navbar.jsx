@@ -12,10 +12,12 @@ const Navbar = () => {
 
 
   const handleLogin = () => {
+    setIsMenuOpen(false)
     navigate("/login");
   };
 
   const handleLogout = () => {
+    setIsMenuOpen(false)
     Cookies.remove("userToken");
     Cookies.remove("userRole");
     if (!Cookies.get("usertoken")) {
@@ -25,6 +27,7 @@ const Navbar = () => {
 
 
   const handleResize = () => {
+    setIsMenuOpen(false)
     setIsMobileView(window.innerWidth <= 1000);
     if (window.innerWidth > 1000) {
       setIsMenuOpen(false);

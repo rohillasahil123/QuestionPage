@@ -1,4 +1,4 @@
-import React, {useState}  from 'react';
+import React, { useState } from 'react';
 import Question from './Components/Question/Question';
 import Practice from './Components/Practice/Practice'
 import { Toaster } from 'react-hot-toast';
@@ -18,9 +18,13 @@ import RefreshHandler from './helper/RefreshHandler';
 // import Protect from './Components/Page/Protect';
 import { UserProvider, useUser } from './helper/useContext';
 import Cookies from 'js-cookie';
+import PageNotFound from "./Components/Page/PageNotFound";
+import ListOfShops from './Components/Page/ListOfShops';
+import ForgotPassword from './Components/Page/ForgotPassword';
+import ResetPassword from './Components/Page/ResetPassword';
 
 const App = () => {
-  const PrivateRoute = ({element}) => {
+  const PrivateRoute = ({ element }) => {
     // const { isLoggedIn } = useUser();
     return Cookies.get('userToken') ? element : <Navigate to="/login" />
   }
@@ -28,27 +32,32 @@ const App = () => {
   return (
     <UserProvider>
       <BrowserRouter>
-        <RefreshHandler/>
-        <Navbar/>
-        <div style={{marginTop:'80px'}}>
+        <RefreshHandler />
+        <Navbar />
+        <div style={{ marginTop: '70px' }}>
           <Routes>
             <Route path='/' element={<Home />} />
-            <Route path='/practice' element={ <Practice/> } />
+            <Route path='/practice' element={<Practice />} />
             <Route path="/about" element={<AboutPage />} />
             <Route path="/contact" element={<ContactUsPage />} />
             {/* <Route path="/login" element={<LoginPage />} /> */}
-            <Route path='/schoolform' element={ <TeacherForm/>}/>
-            <Route path='/login' element= {<Login/> }/>
+            <Route path='/schoolform' element={<TeacherForm />} />
+            <Route path='/login' element={<Login />} />
+            <Route path='/forgotPassword' element={<ForgotPassword />} />
+            <Route path='/resetPassword' element={<ResetPassword />} />
 
 
-            <Route path='/dashboard' element= {<PrivateRoute element = {<Dashboard/>}/>}/>
-            <Route path='/dashboard/addQuestion' element={<PrivateRoute element = {<Question/>}/>}/>
+            <Route path='/dashboard' element={<PrivateRoute element={<Dashboard />} />} />
+            <Route path='/dashboard/addQuestion' element={<PrivateRoute element={<Question />} />} />
+            <Route path='/dashboard/listOfShops' element={<PrivateRoute element={<ListOfShops />} />} />
 
+
+            <Route path="*" element={<PageNotFound />} />
           </Routes>
           <Toaster />
         </div>
       </BrowserRouter>
-      <Footer/>
+      <Footer />
     </UserProvider>
   );
 };

@@ -19,7 +19,8 @@ body {
   position: fixed;
   top: 0;
   z-index: 100;
-  height: 80px;
+  height: 70px;
+  padding: 2px;
 }
 
 .nav-menu {
@@ -175,12 +176,12 @@ body {
 .logo::after {
   content: "";
   position: absolute;
-  top: -15px; /* Larger outline, adjust as needed */
-  left: -15px;
-  width: 70px; /* Adjust size to fit */
-  height: 70px;
+  top: -9px; /* Larger outline, adjust as needed */
+  left: -10px;
+  width: 60px; /* Adjust size to fit */
+  height: 60px;
   border-radius: 50%;
-  border: 4px solid transparent;
+  border: 2px solid transparent;
   border-top-color: blue; /* Different starting color */
   animation: rotateColorCounter 3s linear infinite;
 }
@@ -188,12 +189,12 @@ body {
 .logo::before {
   content: "";
   position: absolute;
-  top: -7.5px;
-  left: -7.5px;
-  width: 55px;
-  height: 55px;
+  top: -5px;
+  left: -5px;
+  width: 50px;
+  height: 50px;
   border-radius: 50%;
-  border: 4px solid transparent;
+  border: 2px solid transparent;
   /* Border initially transparent */
   border-top-color: red;
   /* Starting color */

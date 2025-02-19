@@ -113,7 +113,7 @@ const Footer = () => {
               <li>
                 <a href="#!" className="text-blue flex items-center">
                   <FaGoogle  size={15} className="mr-2"/>
-                  goquizzy@gmial.com
+                  goquizzy@gmail.com
                 </a>
               </li>
             </ul>
