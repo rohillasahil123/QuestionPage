@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
+import WithdrawRequest from './WithdrawRequest';
 import AddMemberForm from './AddMemberForm';
 import AddShoppingPartnerForm from './AddShoppingPartnerForm';
 import FranchiseSideBar from './FranchiseSideBar';
@@ -8,6 +9,7 @@ import AddTeacherForm from './AddTeacherForm';
 import ListOfSchools from './ListOfSchools';
 import { useUser } from "../../helper/useContext";
 import ListOfTeachers from './ListOfTeachers';
+import ListOfContests from './ListOfContest';
 import AddContestForm from './AddContestForm';
 
 const Dashboard = () => {
@@ -19,10 +21,11 @@ const Dashboard = () => {
 
   const roleButtons = {
     Admin: [
+      { label: "💰 Withdraw Request", type: "withdraw", color: "green" },
       { label: "➕ Add Member", type: "member", color: "blue" },
       { label: "🏫 Add School", type: "addSchool", color: "yellow" },
       { label: "🏫 Show School", type: "listOfSchools", color: "yellow" },
-      { label: "📖 Add Teacher", type: "addTeacher", color: "blue" },
+      // { label: "📖 Add Teacher", type: "addTeacher", color: "blue" },
       { label: "📝 Create Contest", type: "addContest", color: "red" },
       { label: "📚 Show Contest", type: "showContest", color: "red" },
     ],
@@ -108,6 +111,7 @@ const Dashboard = () => {
           ))}
         </div>
         <div ref={scrollToFormRef} className='w-full pt-5 scroll-mt-16'>
+          {activeForm === 'withdraw' && <WithdrawRequest isOpen={true} />}
           {activeForm === 'member' && <AddMemberForm isOpen={true} />}
           {activeForm === 'shoppingPartner' && <AddShoppingPartnerForm isOpen={true} />}
           {activeForm === 'listOfShops' && <ListOfShops isOpen={true} />}
@@ -116,7 +120,7 @@ const Dashboard = () => {
           {activeForm === 'addTeacher' && <AddTeacherForm isOpen={true} schoolId={schoolId} schoolName={schoolName} />}
           {activeForm === 'listOfTeachers' && <ListOfTeachers isOpen={true} schoolId={schoolId} schoolName={schoolName} />}
           {activeForm === 'addContest' && <AddContestForm isOpen={true} />}
-          {/* {activeForm === 'showContest' && <ListOfContest isOpen={true} />} */}
+          {activeForm === 'showContest' && <ListOfContests isOpen={true} />}
         </div>
       </div>
     </div>

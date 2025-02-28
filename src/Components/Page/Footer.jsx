@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
-import { FaHome, FaPhoneAlt, FaInfoCircle, FaFacebook, FaTwitter, FaInstagram, FaGoogle, FaMapMarkerAlt } from 'react-icons/fa';
+import { FaHome, FaPhoneAlt, FaInfoCircle, FaFacebook, FaTwitter, FaInstagram, FaGoogle, FaMapMarkerAlt, FaFileContract, FaLock } from 'react-icons/fa';
 import "./Footer.css";
 
 const Footer = () => {
@@ -113,7 +113,19 @@ const Footer = () => {
               <li>
                 <a href="#!" className="text-blue flex items-center">
                   <FaGoogle  size={15} className="mr-2"/>
-                  goquizzy@gmail.com
+                  goquizzytechnology@gmail.com
+                </a>
+              </li>
+              <li>
+                <a href="/privacypolicy" className="text-blue flex items-center">
+                  <FaLock  size={15} className="mr-2"/>
+                  Privacy Policy
+                </a>
+              </li>
+              <li>
+                <a href="/termsandconditions" className="text-blue flex items-center">
+                  <FaFileContract  size={15} className="mr-2"/>
+                  Terms and Conditions
                 </a>
               </li>
             </ul>

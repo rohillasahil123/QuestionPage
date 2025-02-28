@@ -22,6 +22,8 @@ import PageNotFound from "./Components/Page/PageNotFound";
 import ListOfShops from './Components/Page/ListOfShops';
 import ForgotPassword from './Components/Page/ForgotPassword';
 import ResetPassword from './Components/Page/ResetPassword';
+import PrivacyPolicy from './Components/Page/PrivacyPolicy';
+import TermsAndConditions from './Components/Page/TermsAndConditions';
 
 const App = () => {
   const PrivateRoute = ({ element }) => {
@@ -40,6 +42,8 @@ const App = () => {
             <Route path='/practice' element={<Practice />} />
             <Route path="/about" element={<AboutPage />} />
             <Route path="/contact" element={<ContactUsPage />} />
+            <Route path="/privacypolicy" element={<PrivacyPolicy />} />
+            <Route path="/termsandconditions" element={<TermsAndConditions />} />
             {/* <Route path="/login" element={<LoginPage />} /> */}
             <Route path='/schoolform' element={<TeacherForm />} />
             <Route path='/login' element={<Login />} />
@@ -48,8 +52,8 @@ const App = () => {
 
 
             <Route path='/dashboard' element={<PrivateRoute element={<Dashboard />} />} />
-            <Route path='/dashboard/addQuestion' element={<PrivateRoute element={<Question />} />} />
             <Route path='/dashboard/listOfShops' element={<PrivateRoute element={<ListOfShops />} />} />
+            <Route path='/dashboard/QuizzyGame' element={<Question />} />
 
 
             <Route path="*" element={<PageNotFound />} />
