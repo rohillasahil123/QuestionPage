@@ -5,6 +5,8 @@ import Select from "../Select/Select";
 import Modal from 'react-bootstrap/Modal';
 import './Question.css'
 
+const baseUrl = import.meta.env.VITE_BACKEND_URL;
+
 const Question = () => {
   const [question, setQuestion] = useState("");
   const [options, setOptions] = useState(["", "", "", ""]);
@@ -24,7 +26,7 @@ const Question = () => {
     setCorrectAnswer("");
 
     try {
-      const response = await axios.post("https://goquizzy.com/addquestiongk", {
+      const response = await axios.post(`${baseUrl}/addquestiongk`, {
         question,
         correctAnswer,
         options,

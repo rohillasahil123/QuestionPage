@@ -39,22 +39,21 @@ const App = () => {
         <div style={{ marginTop: '70px' }}>
           <Routes>
             <Route path='/' element={<Home />} />
-            <Route path='/practice' element={<Practice />} />
             <Route path="/about" element={<AboutPage />} />
             <Route path="/contact" element={<ContactUsPage />} />
             <Route path="/privacypolicy" element={<PrivacyPolicy />} />
             <Route path="/termsandconditions" element={<TermsAndConditions />} />
             {/* <Route path="/login" element={<LoginPage />} /> */}
             <Route path='/schoolform' element={<TeacherForm />} />
+            
             <Route path='/login' element={<Login />} />
             <Route path='/forgotPassword' element={<ForgotPassword />} />
             <Route path='/resetPassword' element={<ResetPassword />} />
 
-
             <Route path='/dashboard' element={<PrivateRoute element={<Dashboard />} />} />
             <Route path='/dashboard/listOfShops' element={<PrivateRoute element={<ListOfShops />} />} />
+            <Route path='/' element={<Home />} />
             <Route path='/dashboard/QuizzyGame' element={<Question />} />
-
 
             <Route path="*" element={<PageNotFound />} />
           </Routes>

@@ -47,7 +47,8 @@ const AddContestForm = () => {
   const navigate = useNavigate();
 
   const initialFormData = {
-    contestType: isAdmin ? 'Daily Contest' : 'Teacher Contest',
+    contestName: isAdmin ? 'Daily Contest' : 'Teacher Contest',
+    contestType: isAdmin ? 'GK Contest': 'Teacher Contest',
     prizeMoney: isTeacher ? teacherFixedValues.prizeMoney : '',
     feeAmount: isTeacher ? teacherFixedValues.feeAmount : '',
     startTime: '',
@@ -94,7 +95,7 @@ const AddContestForm = () => {
       if (!isNaN(limit) && selectedQuestions.length < limit) {
         setSelectedQuestions((prev) => [...prev, questionId]);
       } else {
-        toast.error(`You can only select ${formData.numberOfQuestions} questions`);
+        toast.error(formData.numberOfQuestions ? `You can only select ${formData.numberOfQuestions || '0'} questions` : 'Add number of questions first');
       }
     }
   };
@@ -162,6 +163,7 @@ const AddContestForm = () => {
       ...customQuestionData,
     };
     setCustomQuestions((prev) => [...prev, newQuestion]);
+    toggleQuestionSelection(newQuestion.id);
     setCustomQuestionData({
       questionText: '',
       options: ['', '', '', ''],
@@ -189,12 +191,22 @@ const AddContestForm = () => {
         {/* Header */}
         <div className="flex flex-col items-start sm:flex-row sm:items-center sm:justify-between mb-4">
           <h2 className="text-lg font-semibold mb-2 sm:mb-0">
-            Create <span className="text-blue-700">{formData.contestType}</span>
+            Create <span className="text-blue-700">{formData.contestName}</span>
           </h2>
           {isAdmin && (
+            <flex flex-col items-start sm:flex-row sm:items-center sm:justify-between mb-4>
             <select
               name="contestType"
               value={formData.contestType}
+              onChange={handleChange}
+              className="p-2 border border-gray-300 rounded-md text-sm w-auto item-right mr-5"
+            >
+              <option value="GK Contest">GK Contest</option>
+              <option value="Syllabus Contest">Syllabus Contest</option>
+            </select>
+            <select
+              name="contestName"
+              value={formData.contestName}
               onChange={handleChange}
               className="p-2 border border-gray-300 rounded-md text-sm w-auto"
             >
@@ -203,6 +215,7 @@ const AddContestForm = () => {
               <option value="Monthly Contest">Monthly Contest</option>
               <option value="Mega Contest">Mega Contest</option>
             </select>
+            </flex>
           )}
         </div>
 
@@ -262,13 +275,15 @@ const AddContestForm = () => {
             </div>
           </div>
 
-          <button
-            type="button"
-            onClick={() => setShowQuestionModal(true)}
-            className="w-full bg-gray-200 text-black py-2 px-4 rounded-md hover:bg-gray-300 mb-4"
-          >
-            Add Questions ({selectedQuestions.length} selected)
-          </button>
+          {(formData.contestType === 'Syllabus Contest' || isTeacher) && (
+            <button
+              type="button"
+              onClick={() => setShowQuestionModal(true)}
+              className="w-full bg-gray-200 text-black py-2 px-4 rounded-md hover:bg-gray-300 mb-4"
+            >
+              Add Questions ({selectedQuestions.length} selected)
+            </button>
+          )}
 
           <button
             type="submit"
@@ -287,142 +302,144 @@ const AddContestForm = () => {
                 Selected Questions: {selectedQuestions.length} / {formData.numberOfQuestions || 0}
               </p>
               
-              {/* For teachers, allow adding custom questions */}
-              {isTeacher && (
-                <div className="mb-4">
-                  {!customQuestionFormVisible ? (
-                    <button
-                      type="button"
-                      onClick={() => setCustomQuestionFormVisible(true)}
-                      className="w-full bg-green-500 text-white py-2 px-4 rounded hover:bg-green-600"
-                    >
-                      Add Custom Question
-                    </button>
-                  ) : (
-                    <div className="p-4 border rounded mb-4">
-                      <div className="mb-2">
-                        <label className="block text-sm font-medium text-gray-700">Question Text</label>
-                        <input
-                          type="text"
-                          name="questionText"
-                          value={customQuestionData.questionText}
-                          onChange={handleCustomQuestionChange}
-                          className="mt-1 p-2 w-full border border-gray-300 rounded-md text-sm"
-                        />
-                      </div>
-                      <div className="mb-2">
-                        <label className="block text-sm font-medium text-gray-700">Options</label>
-                        <div className="space-y-2">
-                          {customQuestionData.options.map((option, index) => (
-                            <div key={index} className="flex items-center gap-2">
-                              <input
-                                type="text"
-                                name={`option${index}`}
-                                value={option}
-                                onChange={(e) => handleCustomQuestionChange(e, index)}
-                                placeholder={`Option ${index + 1}`}
-                                className={`mt-1 p-2 flex-1 rounded-md text-sm ${
-                                  customQuestionData.correctOption === index
-                                    ? "border border-green-700 outline outline-2 outline-green-700 focus:ring-2 focus:ring-green-700 text-green-700"
-                                    : "border border-gray-300"
-                                }`}
-
-                              />
-                              <button
-                                type="button"
-                                onClick={() =>
-                                  setCustomQuestionData((prev) => ({
-                                    ...prev,
-                                    correctOption: index,
-                                  }))
-                                }
-                                className={`mt-1 px-2 py-1 rounded-md text-sm ${
-                                  customQuestionData.correctOption === index
-                                    ? "bg-green-700 text-white"
-                                    : "bg-gray-200 text-gray-700 hover:bg-gray-300"
-                                }`}
-                              >
-                                {customQuestionData.correctOption === index ? "✔" : "Mark"}
-                              </button>
-                            </div>
-                          ))}
-                        </div>
-                      </div>
-                      <div className="flex gap-2">
-                        <button
-                          type="button"
-                          onClick={addCustomQuestion}
-                          className="w-full bg-green-700 text-white py-2 px-4 rounded hover:bg-green-800"
-                        >
-                          Save Question
-                        </button>
-                        <button
-                          type="button"
-                          onClick={() => setCustomQuestionFormVisible(false)}
-                          className="w-full bg-gray-500 text-white py-2 px-4 rounded hover:bg-gray-600"
-                        >
-                          Cancel
-                        </button>
-                      </div>
-                    </div>
-                  )}
-                </div>
-              )}
-
-              {/* Display available questions based on role */}
-              <div className="overflow-y-auto flex-grow">
-                {availableQuestions.length === 0 && isTeacher ? (
-                  <p className="text-sm text-gray-600">
-                    No custom questions available. Please add a custom question.
-                  </p>
-                ) : (
-                  <div className="space-y-3">
-                    {availableQuestions.map((question) => (
-                      <div
-                        key={question.id}
-                        onClick={() => toggleQuestionSelection(question.id)}
-                        className={`flex items-start gap-3 p-3 border rounded cursor-pointer ${
-                          selectedQuestions.includes(question.id) ? "bg-blue-50" : ""
-                        }`}
+              <div className='overflow-scroll'>
+                {/* For teachers, allow adding custom questions */}
+                {isTeacher || isAdmin && (
+                  <div className="mb-4">
+                    {!customQuestionFormVisible ? (
+                      <button
+                        type="button"
+                        onClick={() => setCustomQuestionFormVisible(true)}
+                        className="w-full bg-green-500 text-white py-2 px-4 rounded hover:bg-green-600"
                       >
-                        <input
-                          type="checkbox"
-                          checked={selectedQuestions.includes(question.id)}
-                          onClick={(e) => {
-                            e.stopPropagation();
-                            toggleQuestionSelection(question.id);
-                          }}
-                          readOnly
-                          className="mt-1"
-                        />
-                        <div className="flex-1">
-                          <p className="font-medium">{question.questionText}</p>
-                          <div className="mt-2 space-y-1">
-                            {question.options.map((option, index) => (
-                              <div key={index} className="text-sm flex items-center">
-                                {String.fromCharCode(65 + index)}. {option}
-                                {question.correctOption === index && (
-                                  <span className="ml-2 text-green-500">✔️</span>
-                                )}
+                        Add Custom Question
+                      </button>
+                    ) : (
+                      <div className="p-4 border rounded mb-4">
+                        <div className="mb-2">
+                          <label className="block text-sm font-medium text-gray-700">Question Text</label>
+                          <input
+                            type="text"
+                            name="questionText"
+                            value={customQuestionData.questionText}
+                            onChange={handleCustomQuestionChange}
+                            className="mt-1 p-2 w-full border border-gray-300 rounded-md text-sm"
+                          />
+                        </div>
+                        <div className="mb-2">
+                          <label className="block text-sm font-medium text-gray-700">Options</label>
+                          <div className="space-y-2">
+                            {customQuestionData.options.map((option, index) => (
+                              <div key={index} className="flex items-center gap-2">
+                                <input
+                                  type="text"
+                                  name={`option${index}`}
+                                  value={option}
+                                  onChange={(e) => handleCustomQuestionChange(e, index)}
+                                  placeholder={`Option ${index + 1}`}
+                                  className={`mt-1 p-2 flex-1 rounded-md text-sm ${
+                                    customQuestionData.correctOption === index
+                                      ? "border border-green-700 outline outline-2 outline-green-700 focus:ring-2 focus:ring-green-700 text-green-700"
+                                      : "border border-gray-300"
+                                  }`}
+
+                                />
+                                <button
+                                  type="button"
+                                  onClick={() =>
+                                    setCustomQuestionData((prev) => ({
+                                      ...prev,
+                                      correctOption: index,
+                                    }))
+                                  }
+                                  className={`mt-1 px-2 py-1 rounded-md text-sm ${
+                                    customQuestionData.correctOption === index
+                                      ? "bg-green-700 text-white"
+                                      : "bg-gray-200 text-gray-700 hover:bg-gray-300"
+                                  }`}
+                                >
+                                  {customQuestionData.correctOption === index ? "✔" : "Mark"}
+                                </button>
                               </div>
                             ))}
                           </div>
                         </div>
-                        {isTeacher && (
+                        <div className="flex gap-2">
                           <button
-                            onClick={(e) => {
-                              e.stopPropagation();
-                              removeCustomQuestion(question.id);
-                            }}
-                            className="text-red-500 text-xs"
+                            type="button"
+                            onClick={addCustomQuestion}
+                            className="w-full bg-green-700 text-white py-2 px-4 rounded hover:bg-green-800"
                           >
-                            Remove
+                            Save Question
                           </button>
-                        )}
+                          <button
+                            type="button"
+                            onClick={() => setCustomQuestionFormVisible(false)}
+                            className="w-full bg-gray-500 text-white py-2 px-4 rounded hover:bg-gray-600"
+                          >
+                            Cancel
+                          </button>
+                        </div>
                       </div>
-                    ))}
+                    )}
                   </div>
                 )}
+
+                {/* Display available questions based on role */}
+                <div className="overflow-y-auto flex-grow">
+                  {availableQuestions.length === 0 && isTeacher ? (
+                    <p className="text-sm text-gray-600">
+                      No custom questions available. Please add a custom question.
+                    </p>
+                  ) : (
+                    <div className="space-y-3">
+                      {availableQuestions.map((question) => (
+                        <div
+                          key={question.id}
+                          onClick={() => !isTeacher && toggleQuestionSelection(question.id)}
+                          className={`flex items-start gap-3 p-3 border rounded cursor-pointer ${
+                            selectedQuestions.includes(question.id) ? "bg-blue-50" : ""
+                          }`}
+                        >
+                          <input
+                            type="checkbox"
+                            checked={selectedQuestions.includes(question.id)}
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              toggleQuestionSelection(question.id);
+                            }}
+                            readOnly
+                            className="mt-1"
+                          />
+                          <div className="flex-1">
+                            <p className="font-medium">{question.questionText}</p>
+                            <div className="mt-2 space-y-1">
+                              {question.options.map((option, index) => (
+                                <div key={index} className="text-sm flex items-center">
+                                  {String.fromCharCode(65 + index)}. {option}
+                                  {question.correctOption === index && (
+                                    <span className="ml-2 text-green-500">✔️</span>
+                                  )}
+                                </div>
+                              ))}
+                            </div>
+                          </div>
+                          {isTeacher && (
+                            <button
+                              onClick={(e) => {
+                                e.stopPropagation();
+                                removeCustomQuestion(question.id);
+                              }}
+                              className="text-red-500 text-xs"
+                            >
+                              Remove
+                            </button>
+                          )}
+                        </div>
+                      ))}
+                    </div>
+                  )}
+                </div>
               </div>
               <div className="mt-6 flex flex-col md:flex-row justify-end gap-3">
                 <button

@@ -3,6 +3,7 @@ import axios from "axios";
 import toast from "react-hot-toast";
 import Select from "../Select/Select";
 
+const baseUrl = import.meta.env.VITE_BACKEND_URL;
 
 const Practice = () => {
   const [question, setQuestion] = useState("");
@@ -23,7 +24,7 @@ const Practice = () => {
     setCorrectAnswer("");
 
     try {
-      const response = await axios.post("https://goquizzy.com/addquestionpractice", {
+      const response = await axios.post(`${baseUrl}/addquestionpractice`, {
         question,
         correctAnswer,
         options,
