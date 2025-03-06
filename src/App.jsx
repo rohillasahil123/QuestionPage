@@ -24,6 +24,8 @@ import ForgotPassword from './Components/Page/ForgotPassword';
 import ResetPassword from './Components/Page/ResetPassword';
 import PrivacyPolicy from './Components/Page/PrivacyPolicy';
 import TermsAndConditions from './Components/Page/TermsAndConditions';
+import CancellationRefundPage from './Components/Page/CancellationRefundPage';
+import ShippingDeliveryPage from './Components/Page/ShippingDeliveryPage';
 
 const App = () => {
   const PrivateRoute = ({ element }) => {
@@ -43,6 +45,8 @@ const App = () => {
             <Route path="/contact" element={<ContactUsPage />} />
             <Route path="/privacypolicy" element={<PrivacyPolicy />} />
             <Route path="/termsandconditions" element={<TermsAndConditions />} />
+            <Route path="/cancellationrefundpage" element={<CancellationRefundPage />} />
+            <Route path="/shippingdeliverypage" element={<ShippingDeliveryPage />} />
             {/* <Route path="/login" element={<LoginPage />} /> */}
             <Route path='/schoolform' element={<TeacherForm />} />
             
