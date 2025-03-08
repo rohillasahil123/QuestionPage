@@ -35,9 +35,9 @@ const staticQuestions = [
 ];
 
 const teacherFixedValues = {
-  prizeMoney: "500",
-  feeAmount: "100",
-  numberOfQuestions: "20"
+  prizeMoney: "1000",
+  feeAmount: "10",
+  numberOfQuestions: "1"
 };
 
 const AddContestForm = () => {
@@ -48,11 +48,13 @@ const AddContestForm = () => {
 
   const initialFormData = {
     contestName: isAdmin ? 'Daily Contest' : 'Teacher Contest',
-    contestType: isAdmin ? 'GK Contest': 'Teacher Contest',
+    contestType: isAdmin ? 'GK Contest' : 'Teacher Contest',
     prizeMoney: isTeacher ? teacherFixedValues.prizeMoney : '',
     feeAmount: isTeacher ? teacherFixedValues.feeAmount : '',
     startTime: '',
     numberOfQuestions: isTeacher ? teacherFixedValues.numberOfQuestions : '',
+    // board: '',
+    // class: ''
   };
 
   const [formData, setFormData] = useState(initialFormData);
@@ -107,22 +109,41 @@ const AddContestForm = () => {
       toast.error("Please enter a valid number of questions");
       return;
     }
-    if (selectedQuestions.length !== limit) {
+    if (formData.contestType !== 'GK Contest' && selectedQuestions.length !== limit) {
       toast.error(`Please select exactly ${limit} questions`);
       return;
     }
+    
+    // Get complete details of selected questions
+    const selectedQuestionObjects = availableQuestions.filter(q => selectedQuestions.includes(q.id));
+    
     try {
       const payload = {
         ...formData,
         numberOfQuestions: limit,
-        questions: selectedQuestions,
+        questions: selectedQuestionObjects,
       };
       
-      // Simulated API call
       console.log("Submitting contest with:", payload);
-      toast.success("Contest created successfully!");
-      setTimeout(() => navigate('/dashboard'), 1000);
-
+      const response = await axios.post(`${baseUrl}/company/contest/addContest`, payload, {
+        withCredentials: true,
+        validateStatus: (status) => status < 500,
+      });
+      const result = response.data;
+      const { success, message, error } = result;
+      if (success) {
+        toast.success(message);
+        setTimeout(() => {
+          navigate('/dashboard');
+        }, 100);
+      } else if (error) {
+        toast.error(error.details[0].message);
+      } else {
+        toast.error(message);
+      }
+      // toast.success("Contest created successfully!");
+      // setTimeout(() => navigate('/dashboard'), 1000);
+      
     } catch (error) {
       console.error("Unexpected error during submission:", error);
       toast.error("Something went wrong. Please try again.");
@@ -194,33 +215,75 @@ const AddContestForm = () => {
             Create <span className="text-blue-700">{formData.contestName}</span>
           </h2>
           {isAdmin && (
-            <flex flex-col items-start sm:flex-row sm:items-center sm:justify-between mb-4>
-            <select
-              name="contestType"
-              value={formData.contestType}
-              onChange={handleChange}
-              className="p-2 border border-gray-300 rounded-md text-sm w-auto item-right mr-5"
-            >
-              <option value="GK Contest">GK Contest</option>
-              <option value="Syllabus Contest">Syllabus Contest</option>
-            </select>
-            <select
-              name="contestName"
-              value={formData.contestName}
-              onChange={handleChange}
-              className="p-2 border border-gray-300 rounded-md text-sm w-auto"
-            >
-              <option value="Daily Contest">Daily Contest</option>
-              <option value="Weekly Contest">Weekly Contest</option>
-              <option value="Monthly Contest">Monthly Contest</option>
-              <option value="Mega Contest">Mega Contest</option>
-            </select>
-            </flex>
+            <div className="flex flex-col items-start sm:flex-row sm:items-center sm:justify-between mb-4">
+              <select
+                name="contestType"
+                value={formData.contestType}
+                onChange={handleChange}
+                className="p-2 border border-gray-300 rounded-md text-sm w-auto mr-5"
+              >
+                <option value="GK Contest">GK Contest</option>
+                <option value="Syllabus Contest">Syllabus Contest</option>
+              </select>
+              <select
+                name="contestName"
+                value={formData.contestName}
+                onChange={handleChange}
+                className="p-2 border border-gray-300 rounded-md text-sm w-auto"
+              >
+                <option value="Daily Contest">Daily Contest</option>
+                <option value="Weekly Contest">Weekly Contest</option>
+                <option value="Monthly Contest">Monthly Contest</option>
+                <option value="Mega Contest">Mega Contest</option>
+              </select>
+            </div>
           )}
         </div>
 
         {/* Form */}
         <form onSubmit={handleSubmit}>
+          {(formData.contestType === 'Syllabus Contest' || isTeacher) && (
+            <div className="flex flex-wrap -mx-2">
+              {/* <div className="w-full sm:w-1/2 px-2 mb-3">
+                <label className="block text-sm font-medium text-gray-700">Board</label>
+                <select
+                  name="board"
+                  value={formData.board}
+                  onChange={handleChange}
+                  required
+                  className="mt-1 p-2 w-full border border-gray-300 rounded-md text-sm"
+                >
+                  <option value="">Select Board</option>
+                  <option value="CBSE">CBSE</option>
+                  <option value="ICSE">ICSE</option>
+                  <option value="HBSC">HBSC</option>
+                  <option value="State Board">State Board</option>
+                  <option value="Other">Other</option>
+                </select>
+              </div> */}
+
+              {/* <div className="w-full sm:w-1/2 px-2 mb-3">
+                <label className="block text-sm font-medium text-gray-700">Class</label>
+                <select
+                  name="class"
+                  value={formData.class}
+                  onChange={handleChange}
+                  required
+                  className="mt-1 p-2 w-full border border-gray-300 rounded-md text-sm"
+                >
+                  <option value="">Select Class</option>
+                  {[...Array(8)].map((_, i) => {
+                    const grade = i + 3; // Start from 3rd class
+                    return (
+                      <option key={grade} value={grade === 3 ? '3rd' : `${grade}th`}>
+                        {grade === 3 ? '3rd' : `${grade}th`} Class
+                      </option>
+                    );
+                  })}
+                </select>
+              </div> */}
+            </div>
+          )}
           <div className="flex flex-wrap -mx-2">
             {/* Prize Money */}
             <div className="w-full sm:w-1/2 px-2 mb-3">
@@ -304,7 +367,7 @@ const AddContestForm = () => {
               
               <div className='overflow-scroll'>
                 {/* For teachers, allow adding custom questions */}
-                {isTeacher || isAdmin && (
+                {(isTeacher || isAdmin) && (
                   <div className="mb-4">
                     {!customQuestionFormVisible ? (
                       <button
@@ -342,7 +405,6 @@ const AddContestForm = () => {
                                       ? "border border-green-700 outline outline-2 outline-green-700 focus:ring-2 focus:ring-green-700 text-green-700"
                                       : "border border-gray-300"
                                   }`}
-
                                 />
                                 <button
                                   type="button"

@@ -21,13 +21,13 @@ const ListOfContests = () => {
 
   useEffect(() => {
     fetchContests();
-  }, [filterType]); // Fetch contests whenever filterType changes
+  }, [filterType]); 
 
   const fetchContests = async () => {
     try {
       setLoading(true);
       const response = await axios.get(`${baseUrl}/company/contest/getContest`, {
-        params: { type: filterType || undefined }, // Send selected option
+        params: { type: filterType || undefined },
         withCredentials: true,
         validateStatus: (status) => status < 500,
       });
@@ -71,7 +71,8 @@ const ListOfContests = () => {
   const handleDelete = async (id) => {
     if (!window.confirm("Are you sure you want to delete this contest?")) return;
     try {
-      const response = await axios.delete(`${baseUrl}/contests/delete/${id}`, {
+      const response = await axios.delete(`${baseUrl}/company/contest/deleteContest/${id}`, {
+        params: { type: filterType },
         withCredentials: true,
       });
       if (response.data.success) {
@@ -132,6 +133,15 @@ const ListOfContests = () => {
                 Winning Amount: ₹{contest.winningAmount ?? contest.prizePoll}
               </h4>
             )}
+            {contest.schoolName && (
+              <p className="text-gray-700">School Name: {contest.schoolName}</p>
+            )}
+            {contest.class && (
+              <p className="text-gray-700">Class: {contest.class}</p>
+            )}
+            {contest.participants && (
+              <p className="text-gray-700">Participants: {contest.participants.length}</p>
+            )}
             {contest.date && (
               <p className="text-gray-700">Date: {new Date(contest.date).toLocaleDateString()}</p>
             )}
@@ -147,8 +157,8 @@ const ListOfContests = () => {
               <p className="text-gray-700">Is Full: {contest.isFull ? "Yes" : "No"}</p>
             )}
             <div className="flex justify-between mt-4">
-              <button className="px-3 py-1 bg-blue-500 text-white rounded" onClick={() => handleEdit(contest)}>Edit</button>
-              <button className="px-3 py-1 bg-red-500 text-white rounded" onClick={() => handleDelete(contest._id)}>Delete</button>
+              {!(contest.key) && <button className="px-3 py-1 bg-blue-500 text-white rounded" onClick={() => handleEdit(contest)}>Edit</button>}
+              <button className="px-3 py-1 bg-red-500 text-white rounded" onClick={() => handleDelete(contest._id, contest.type)}>Delete</button>
             </div>
           </div>
         ))}

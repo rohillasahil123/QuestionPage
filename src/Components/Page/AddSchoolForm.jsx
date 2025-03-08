@@ -12,6 +12,7 @@ function AddSchoolForm({ isOpen }) {
   const [formData, setFormData] = useState({
     schoolName: '',
     principalName: '',
+    board: '',
     phone: '',
     email: '',
     password: '',
@@ -132,6 +133,23 @@ function AddSchoolForm({ isOpen }) {
                 className="mt-1 p-2 w-full border border-gray-300 rounded-md text-sm"
               />
             </div>
+            <div className="w-full sm:w-1/2">
+              <label className="block text-sm font-medium text-gray-700">Board</label>
+              <select
+                name="board"
+                value={formData.board}
+                onChange={handleChange}
+                required
+                className="mt-1 p-2 w-full border border-gray-300 rounded-md text-sm"
+              >
+                <option value="">Select Board</option>
+                <option value="CBSE">CBSE</option>
+                <option value="ICSE">ICSE</option>
+                <option value="HBSC">HBSC</option>
+                <option value="State Board">State Board</option>
+                <option value="Other">Other</option>
+              </select>
+            </div>
           </div>
 
           {/* Phone & Email */}
@@ -147,17 +165,6 @@ function AddSchoolForm({ isOpen }) {
                 className="mt-1 p-2 w-full border border-gray-300 rounded-md text-sm"
               />
             </div>
-            {/* <div className="w-full md:w-1/2">
-              <label className="block text-sm font-medium text-gray-700">Email</label>
-              <input
-                type="email"
-                name="email"
-                value={formData.email}
-                onChange={handleChange}
-                required
-                className="mt-1 p-2 w-full border border-gray-300 rounded-md text-sm"
-              />
-            </div> */}
             {/* State Input with Suggestions */}
             <div className="w-full md:w-1/2 relative">
               <label htmlFor="state" className="block text-sm font-medium text-gray-700">

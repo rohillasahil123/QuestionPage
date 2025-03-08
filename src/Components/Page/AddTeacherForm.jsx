@@ -56,11 +56,9 @@ const AddTeacherForm = ({schoolId, schoolName}) => {
       <div className="popup-form bg-white p-4 rounded-lg shadow-lg w-full h-auto overflow-y-auto border border-gray-300">
         <h2 className="text-lg font-semibold mb-3">Create Teacher for {schoolName}</h2>
         <form onSubmit={handleSubmit}>
-          <div className="flex flex-wrap -mx-2">
-            <div className="w-1/2 px-2 mb-3">
-              <label className="block text-sm font-medium text-gray-700">
-                Teacher Name
-              </label>
+          <div className="flex flex-col md:flex-row gap-3 mb-3">
+            <div className="w-full md:w-1/2">
+              <label className="block text-sm font-medium text-gray-700">Teacher Name</label>
               <input
                 type="text"
                 name="name"
@@ -70,7 +68,7 @@ const AddTeacherForm = ({schoolId, schoolName}) => {
                 className="mt-1 p-2 w-full border border-gray-300 rounded-md text-sm"
               />
             </div>
-            <div className="w-1/2 px-2 mb-3">
+            <div className="w-full md:w-1/2">
               <label className="block text-sm font-medium text-gray-700">
                 Phone Number
               </label>
@@ -83,7 +81,9 @@ const AddTeacherForm = ({schoolId, schoolName}) => {
                 className="mt-1 p-2 w-full border border-gray-300 rounded-md text-sm"
               />
             </div>
-            <div className="w-1/2 px-2 mb-3">
+          </div>
+          <div className="flex flex-col md:flex-row gap-3 mb-3">
+            <div className="w-full md:w-1/2">
               <label className="block text-sm font-medium text-gray-700">
                 Email
               </label>
@@ -96,7 +96,7 @@ const AddTeacherForm = ({schoolId, schoolName}) => {
                 className="mt-1 p-2 w-full border border-gray-300 rounded-md text-sm"
               />
             </div>
-            <div className="w-1/2 px-2 mb-3">
+            <div className="w-full md:w-1/2">
               <label className="block text-sm font-medium text-gray-700">
                 Password
               </label>
@@ -118,20 +118,29 @@ const AddTeacherForm = ({schoolId, schoolName}) => {
                 </button>
               </div>
             </div>
-            <div className="w-1/2 px-2 mb-3">
-              <label className="block text-sm font-medium text-gray-700">
-                Class
-              </label>
-              <input
-                type="text"
+          </div>
+          <div className="flex flex-col md:flex-row gap-3 mb-3">
+            <div className="w-full md:w-1/2">
+              <label className="block text-sm font-medium text-gray-700">Class</label>
+              <select
                 name="class"
                 value={formData.class}
                 onChange={handleChange}
                 required
                 className="mt-1 p-2 w-full border border-gray-300 rounded-md text-sm"
-              />
+              >
+                <option value="">Select Class</option>
+                {[...Array(8)].map((_, i) => {
+                  const grade = i + 3; // Start from 3rd class
+                  return (
+                    <option key={grade} value={grade === 3 ? '3rd' : `${grade}th`}>
+                      {grade === 3 ? '3rd' : `${grade}th`} Class
+                    </option>
+                  );
+                })}
+              </select>
             </div>
-            <div className="w-1/2 px-2 mb-3">
+            <div className="w-full md:w-1/2">
               <label className="block text-sm font-medium text-gray-700">
                 Subject
               </label>
